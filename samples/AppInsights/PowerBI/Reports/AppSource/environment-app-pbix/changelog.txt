@@ -1,21 +1,51 @@
 Ideas
-* Usage: Feature uptake page
+* Errors: Add AL stacktrace to failed job queue page (when available - pending app team bugfix)
 * Usage: Add user telemetry id to page view pages and allow filters on this (when available in client telemetry)
+* Usage: Feature uptake page
 * Administration: Permission set changes
 * Performance: Recurring job queue jobs with long running SQL/AL/locks
 * Performance: Database wait statistics page
 * Performance: add filters on select performance pages to determine if an operation happened in a Job Queue entry run
+* Performance: outgoing ws calls happening while session is taking database locks/in a write transactions
 * Errors: Add recurring failing task scheduler/job queue jobs to recommendations
-* Errors: Add AL stacktrace to failed job queue page (when available - pending app team)
 * Show successful/failed authentication calls joined to web service telemetry to extract endpoint, http headers
 * Dataset: include list for event ids as a parameter
 * LRQ: Add a filter on WITH(READUNCOMMITTED) 
+* Usage: add license type on sessions page
 
-* Performance: BCLE page
+All the small things
+* Performance: On page 'Pageviews', added per-app/per-object visuals
+* Page views - add per environment visual
+* Reports - add per environment visual
+* Feature Usage - add per environment visual
+* Errors: On page 'error dialogs' page, change AL call stack visual width
+* Errors: On page 'permission errors' page, add visuals for top/bottom of AL call stack 
+* Errors: On page 'error messages' page, add visuals for top/bottom of AL call stack 
+* Errors: On page 'email errors' page, add visuals for top/bottom of AL call stack 
+
 
 vNext (implemented, coming in the next release, probably available in the beta app)
 Install beta app from: https://aka.ms/bctelemetryreportbeta
+* Usage: On page 'Deprecated features' - show different icon/text if no data is available
+* Errors: On all pages, add visuals to show count last day, last week, older
+* Errors: On page 'login errors' page, add link to TSG on docs, show different text if no data is available
+* Errors: About the report, missing link to error message votes KQL sample url
+
+
+2023-01-03
+* Errors: Job Queue errors - added link to Page 673 'Job Queue Entry Card' in Business Central (Online) with filter on ID
+* Performance: On page 'Environment updates', added Date/time and fixed broken analyze in KQL visual
+* Performance: On page 'Long Running SQL queries', tuned data load, fixed broken analyze in KQL visual, added per-app/per-object visuals, added explanation for SQL queries
+* Performance: new page showing Performance Toolkit (BCPT) data.
+* Performance: On page 'Outgoing webservice calls', tuned data load, added min/max measures on execution time, changed ws by http code visual to show data by response type.
+* Performance: on page 'Reports', tuned data load. Also added per-app/per-object visuals and added sum time. Enhanced description with better tuning advice.
+* Dataset: Tuned data refresh to allow for 30 min data loads per query. Also using 'set notruncation;' in all KQL queries to remove 500k row limits
+* Dataset: Tuned data load for queries PageViewPerformance, IncomingWebServicePerformance, FeatureUsage, AuthenticationWithWebServiceKey, FeatureErrors, IncomingWebServiceErrors, ExtensionLifeCycle
+
+
+2022-12-01
 * Usage: On page 'Application area', Added new visual 'Application area usage by Environments'
+* Usage: On pages 'Page views', 'Reports', and 'Feature Usage', Added new visuals 'X by Publisher' and 'X by Extension Version'
 * Performance: on page 'Long running SQL', added visual with info on aad tenants impacted
 * Performance: New page added: Performance events
 * Performance: New page added: Environment updates
@@ -23,7 +53,8 @@ Install beta app from: https://aka.ms/bctelemetryreportbeta
 * Errors: on page 'Job Queue Errors', added visual with detailed info (including job id and task id) for further troubleshooting
 * Administration: on Configuration page, changed order of parameter visuals, added EnvironmentDim visual
 * All four reports: turned on ability to download underlaying data from all visuals
-* All four reports: turned on to analyze further with KQL on all pages (currently only enabled on a few pages in the Performance report)
+* All four reports: turned on to analyze further with KQL on all pages
+* Dataset: tuned all KQL queries. Impact is up to 5x faster refresh time.
 
 
 2022-11-07
@@ -48,6 +79,7 @@ Install beta app from: https://aka.ms/bctelemetryreportbeta
 * Error report: on login errors page, added info about session type (UI, WS, or background)
 * Dataset: fixed min/max in Dates dimension (some day-of-week visuals showed empty weekday)
 * Dataset: added support for defining an include list of environments
+           Format is {"include":[{"AAD tenant id":"<aad tenant id 1>","Name":"<environment name 1>"}, {"AAD tenant id":"<aad tenant id 2>","Name":"<environment name 2>"}]}
 * Performance: on Database lock timeouts page, added environment visual, fixed alignment on other visuals
 * Performance: on Sessions page, added environment visual, added session type to per-client visual
 * Performance: on pages "Database lock timeouts", "Long running SQL", and "Long running AL", added visual with info on bottom line of the stack trace

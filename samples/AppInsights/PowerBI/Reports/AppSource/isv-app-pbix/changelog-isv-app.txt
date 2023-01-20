@@ -1,18 +1,66 @@
-TODO
-* Administration report: Added hierarchy, message details, and feature telemetry dimension for events on telemetry event statistics page
-* Performance report: Added number of columns to SQL statements visual on Long Running SQL page
+Ideas
+* Errors: On all pages, add visuals to show count last day, last week, older
+* Performance: On page 'Pageviews', added per-app/per-object visuals
+* Dataset: on all queries, link to AppDim. Add global filters
+* Dataset: collapse app name and id in appDim hierarchy
+* Usage: use combined app name and id on X by app visuals (clients, locations, pageviews, reports, ...)
+* Performance: use combined app name and id on X by app visuals (pageviews, reports, incoming ws, outgoing ws, Updates)
+* Administration: App inventory query needs a rework 
+* Administration: Data in telemetry page, stats by app visual has data where app is empty, probably needs fixing in the dataset
+
+
+The little things
+* Usage: integrations page - consider showing by host and then by endpoint (check parity with VAR app)
+* Usage: 'Feature uptake' page, add domain to Environment information visual
+* Errors: extension lifecycle page, make error details visual full width
+* Errors: on incoming/outgoing ws errors pages, get parity with corresponding perf pages and align with VAR app
 
 
 ------------------
 vNext (implemented, coming in the next release, probably available in the beta app)
 Install beta app from: https://aka.ms/bctelemetry-isv-app-beta
 ------------------
+* Dataset: fixed issue with JSON parsing in appsource validation data
+
+
+AppsourceSubmissionRequestExtensions
+OLE DB or ODBC error: [DataFormat.Error] We found an invalid array in the JSON input..
+
+ReportPerformance
+Column 'MajorVersion' in table 'ReportPerformance' cannot be found or may not be used in this expression. OLE DB or ODBC error: Exception from HRESULT: 0x80040E4E.
+
+------------------
+2023-01-03 release
+------------------
+* Usage: On page 'Integrations', fixed filters
+* Performance: New page showing Performance Toolkit (BCPT) data.
+* Performance: On page 'Incoming webservice calls', tuned data load, fixed filters
+* Performance: On page 'Long Running SQL queries', tuned data load, fixed broken analyze in KQL visual, added per-app/per-object visuals, added explanation for SQL queries
+* Performance: On page 'Outgoing webservice calls', tuned data load, added min/max measures on execution time, changed ws by http code visual to show data by response type.
+* Performance: On page 'Reports', tuned data load. Also added per-app/per-object visuals and added sum time. Enhanced description with better tuning advice. Fixed filters
+* Administration: On page 'Extension lifecycle', tuned data load, added visual for events by version. Also changed 'App Lifecycle Events by App' visual to a matrix
+* Administration: On page 'ContainerHelper', fixed empty events
+* Administration: On page 'Al-Go', fixed empty events, fixed filters
+* Dataset: Tuned data load for queries IncomingWebServiceErrors, PageViewPerformance, FeatureUsage, FeatureErrors, ExtensionLifecycle.
+* Dataset: Tuned data refresh to allow for 30 min data loads per query. Also using 'set notruncation;' in all KQL queries to remove 500k row limits
+* Dataset: Fixed bug 'AppInventory.kql does not show on-prem multitenant instances' (Issue #169)
+
+
+------------------
+2022-12-01 release
+------------------
+* Usage: On pages 'Page views', 'Reports', and 'Feature Usage', Added new visuals 'X by Publisher' and 'X by Extension Version'
+* Usage: On pages 'Clients', 'Locations', 'Reports', 'Feature Usage', 'Integrations', 'Keyvault' added new visuals 'X by app'
 * Errors: on page 'Error dialogs', added visuals with info on top/bottom line of the stack trace
 * Administration: on Configuration page, changed order of parameter visuals, added EnvironmentDim visual
 * Administration: on Inventory page, added domain to 'Apps by environment' visual (GitHub issue #146)
 * Administration: on AppsourceValidations page, added date filter and 'requests by date' visual (GitHub issue #162)
+* Administration report: Added hierarchy, message details, and feature telemetry dimension for events on telemetry event statistics page
+* Performance report: Added 'number of columns' and 'Take locks' fields to SQL statements visual on Long Running SQL page
+* Performance report: Added ability to do version-to-version comparisons on 'Updates' page
 * All four reports: turned on ability to download underlaying data from all visuals
-
+* All four reports: turned on to analyze further with KQL on all pages
+* Dataset: tuned all KQL queries. Impact is up to 5x faster refresh time.
 
 ------------------
 2022-11-07 release
